@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/drawable/confirm_menu.xml" value="0.2835" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/drawable/rounded_layout.xml" value="0.2835" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/drawable/settings_background.xml" value="0.2835" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/activity_main_cre.xml" value="0.25" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/confirm.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/connect.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/create_menu.xml" value="0.30434782608695654" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/expandable_button.xml" value="0.25" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/expandad_button.xml" value="0.17083333333333334" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/list_category.xml" value="0.25" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/list_group.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/list_item.xml" value="0.25" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/list_item2.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/list_item_expanded.xml" value="0.18" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/menu_category.xml" value="0.67" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/menu_item.xml" value="0.5" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/order.xml" value="0.1390625" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/order_menu.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/qr_menu.xml" value="0.34375" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/set_text.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/settings.xml" value="0.33" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/show_menu_preview.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/show_qr_cre.xml" value="0.22" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/show_qr_menu.xml" value="0.34375" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/show_qr_order.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/table_count.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/test1.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/test2.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/test3.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/layout/test4.xml" value="0.23596014492753623" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/menu/connect.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/ArdaM/AndroidStudioProjects/Hosgeldiniz/app/src/main/res/menu/settings.xml" value="0.1890625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

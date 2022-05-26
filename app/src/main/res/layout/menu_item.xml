@@ -1,0 +1,54 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="4dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/menubtn"
+            style="@style/roundedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="5dp"
+            android:insetTop="0dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/lblue" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp">
+
+        <ImageButton
+            android:id="@+id/remove"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/remove_menu" />
+
+        <EditText
+            android:id="@+id/count"
+            android:text="0"
+            android:hint=" "
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <ImageButton
+            android:id="@+id/add"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/add_menu" />
+    </LinearLayout>
+</FrameLayout>
