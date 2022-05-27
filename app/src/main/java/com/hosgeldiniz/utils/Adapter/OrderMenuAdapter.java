@@ -21,6 +21,8 @@ import com.hosgeldiniz.utils.DefActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class OrderMenuAdapter extends BaseAdapter {
@@ -41,13 +43,16 @@ public class OrderMenuAdapter extends BaseAdapter {
 
     private void add(View view) {
         EditText counter = ((View)view.getParent()).findViewById(R.id.count);
-        int count = parseInt(counter.getEditableText().toString());
+        String c = counter.getEditableText().toString();
+        int count;
+        if (!c.isEmpty()) count = parseInt(c);
+        else count = 0;
         count ++;
         counter.setText(String.valueOf(count));
 
         test.add(getArray(view)[3]);
     }
-    List<String> test = new ArrayList();
+    ArrayList test = new ArrayList();
 
     private void remove(View view) {
         EditText counter = ((View)view.getParent()).findViewById(R.id.count);
@@ -59,7 +64,7 @@ public class OrderMenuAdapter extends BaseAdapter {
         String item = getArray(view)[3];
         count = Collections.frequency(List, item);
         count --;
-        test = test.stream().filter(i -> i.equals(item)).collect(Collectors.toList());
+        test = (ArrayList) test.stream().filter(i -> i.equals(item)).collect(Collectors.toList());
 
         for (int i = 0; i < count; i++) test.add(item);
 
@@ -120,4 +125,5 @@ public class OrderMenuAdapter extends BaseAdapter {
         return ListView.getId();
 
     }
+
 }
