@@ -1,9 +1,6 @@
 package com.hosgeldiniz.utils;
 
-import static com.hosgeldiniz.utils.Configs.getName;
 import static com.hosgeldiniz.utils.Configs.setMenu;
-import static com.hosgeldiniz.utils.connect.initThread;
-import static com.hosgeldiniz.utils.connect.outList;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,9 +16,7 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
 
     ObjectInputStream oIn;
     DefActivity d;
-    byte msgType;
-    String text;
-    boolean test = true;
+    boolean stop = true;
     boolean host;
     String[] msg;
 
@@ -34,7 +29,7 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
     public void stop() {
         try {
             oIn.close();
-            test = false;
+            stop = false;
             cancel(true);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,26 +42,26 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
 
         Log.e("testtest", "test");
 
-        while (test) {
-            Log.e("testtest", "test2");
+        while (stop) {
+            Log.e("testtest1", "test2");
             try {
 
-                Log.e("testtest", "msg " + Arrays.toString(msg));
                 msg = oIn.readUTF().split("[$]");
+                Log.e("testtest2", Arrays.toString(msg));
                 switch (msg[0]) {
 
                     default:
                         if (oIn.readObject() != null) {
                             setMenu((List<String>) oIn.readObject());
-                            Toast(HostName + " yeni bir Menü gönderdi");
+                            Toast(HostName + " yeni bir Menü gönderdi  2");
                         }
                         //Thread.sleep(30);
-                            break;
+                        break;
 
                     case "name":
                         HostName = msg[1];
                         Toast(HostName + " baglandi");
-                       // if (host) initThread(true, CurrentPort);
+                        // if (host) initThread(true, CurrentPort);
                         break;
 
                     case "menu":
@@ -74,8 +69,12 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
                         Toast(HostName + " yeni bir Menü gönderdi");
                         break;
 
+                    case "order":
+                        Toast(HostName + " " + msg[1]);
+                        break;
+
                 }
-                //oIn.reset();
+                oIn.reset();
                 msg = new String[]{};
 
             } catch (IOException | ClassNotFoundException e) {
@@ -92,7 +91,7 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
     }
 
     public void Toast(String s) {
-        Log.e("testtest", s);
+        Log.e("testtest toast", s);
         d.runOnUiThread(() -> Toast.makeText(d, s, Toast.LENGTH_SHORT).show());
     }
 }

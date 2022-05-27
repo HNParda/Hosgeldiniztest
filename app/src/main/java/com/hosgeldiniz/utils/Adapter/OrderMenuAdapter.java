@@ -19,10 +19,7 @@ import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class OrderMenuAdapter extends BaseAdapter {
@@ -30,6 +27,7 @@ public class OrderMenuAdapter extends BaseAdapter {
     private final DefActivity context;
     private final List<String> List;
     private final ListView ListView;
+    public ArrayList<String> order = new ArrayList<>();
 
     public OrderMenuAdapter(DefActivity context, ListView ListView) {
         this.context = context;
@@ -42,50 +40,35 @@ public class OrderMenuAdapter extends BaseAdapter {
     }
 
     private void add(View view) {
-        EditText counter = ((View)view.getParent()).findViewById(R.id.count);
+        EditText counter = ((View) view.getParent()).findViewById(R.id.count);
         String c = counter.getEditableText().toString();
         int count;
         if (!c.isEmpty()) count = parseInt(c);
         else count = 0;
-        count ++;
+        count++;
         counter.setText(String.valueOf(count));
-
-        test.add(getArray(view)[3]);
+        order.add(getArray(view)[3]);
     }
-    ArrayList test = new ArrayList();
 
     private void remove(View view) {
-        EditText counter = ((View)view.getParent()).findViewById(R.id.count);
+        EditText counter = ((View) view.getParent()).findViewById(R.id.count);
         int count = parseInt(counter.getEditableText().toString());
-        if  (count == 0) return;
-        count --;
+        if (count == 0) return;
+        count--;
         counter.setText(String.valueOf(count));
-
         String item = getArray(view)[3];
-        count = Collections.frequency(List, item);
-        count --;
-        test = (ArrayList) test.stream().filter(i -> i.equals(item)).collect(Collectors.toList());
-
-        for (int i = 0; i < count; i++) test.add(item);
-
+        order = (ArrayList<String>) order.stream().filter(i -> !i.equals(item)).collect(Collectors.toList());
+        for (int i = 0; i < count; i++) order.add(item);
     }
 
-    String[] getArray(View view) {
-        return List.get(ListView.getPositionForView(view)).split("[$]");
-    }
-
-    public List test() {
-        return test;
-    }
+    String[] getArray(View view) { return List.get(ListView.getPositionForView(view)).split("[$]"); }
 
     @SuppressLint("InflateParams")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         String listTitle = (String) getItem(i);
         String[] args = listTitle.split("[$]");
         LayoutInflater layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         if (args[0].equals("group")) {
             view = layoutInflater.inflate(R.layout.menu_category, null);
             TextView listTitleTextView = view.findViewById(R.id.text);
@@ -95,11 +78,9 @@ public class OrderMenuAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.menu_item, null);
             Button btn = view.findViewById(R.id.menubtn);
             btn.setText(args[1]);
-
             ImageButton checkBox = view.findViewById(R.id.add);
             checkBox.setOnClickListener(this::add);
-
-                        checkBox = view.findViewById(R.id.remove);
+            checkBox = view.findViewById(R.id.remove);
             checkBox.setOnClickListener(this::remove);
         }
         return view;
@@ -123,7 +104,6 @@ public class OrderMenuAdapter extends BaseAdapter {
     @Override
     public long getItemId(int i) {
         return ListView.getId();
-
     }
 
 }
