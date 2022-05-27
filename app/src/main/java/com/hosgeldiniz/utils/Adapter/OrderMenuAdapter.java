@@ -4,25 +4,20 @@ import static java.lang.Integer.parseInt;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hosgeldiniz.R;
 import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -64,7 +59,7 @@ public class OrderMenuAdapter extends BaseAdapter {
         String item = getArray(view)[3];
         count = Collections.frequency(List, item);
         count --;
-        test = test.stream().filter(i -> i.contains(item)).collect(Collectors.toList());
+        test = test.stream().filter(i -> i.equals(item)).collect(Collectors.toList());
 
         for (int i = 0; i < count; i++) test.add(item);
 
@@ -72,6 +67,10 @@ public class OrderMenuAdapter extends BaseAdapter {
 
     String[] getArray(View view) {
         return List.get(ListView.getPositionForView(view)).split("[$]");
+    }
+
+    public List test() {
+        return test;
     }
 
     @SuppressLint("InflateParams")
