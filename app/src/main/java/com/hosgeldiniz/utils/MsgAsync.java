@@ -1,6 +1,7 @@
 package com.hosgeldiniz.utils;
 
 import static com.hosgeldiniz.utils.Configs.setMenu;
+import static com.hosgeldiniz.utils.Configs.setTableCount;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -66,11 +67,12 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
 
                     case "menu":
                         setMenu((List<String>) oIn.readObject());
+                        setTableCount(Integer.parseInt(msg[1]));
                         Toast(HostName + " yeni bir Menü gönderdi");
                         break;
 
                     case "order":
-                        Toast(HostName + " " + msg[1]);
+                        Toast(HostName + " " + msg[1] + " " + msg[2]);
                         break;
 
                 }

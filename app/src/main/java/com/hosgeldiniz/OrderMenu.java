@@ -36,11 +36,16 @@ public class OrderMenu extends DefActivity {
         for (int i = 0; i < OrderMenuAdapter.order.size(); i++)
             t.append(OrderMenuAdapter.order.get(i));
         ((TextView) findViewById(R.id.textt)).setText(t);
-        Log.e("testtest", "order$" + t);
-        try {
-            outList.writeUTF("order$" + t);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Log.e("testtest", "order$" + table + "$" + t);
+        Thread th =  new Thread(() -> {
+            try {
+                outList.writeUTF("order$" + table + "$" + t);
+                outList.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        th.start();
+        th.interrupt();
     }
 }

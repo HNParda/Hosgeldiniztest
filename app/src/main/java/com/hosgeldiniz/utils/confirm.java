@@ -2,6 +2,7 @@ package com.hosgeldiniz.utils;
 
 import static com.hosgeldiniz.utils.Configs.getMenu;
 import static com.hosgeldiniz.utils.Configs.getName;
+import static com.hosgeldiniz.utils.Configs.getTableCount;
 import static com.hosgeldiniz.utils.connect.outList;
 
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class confirm extends DefActivity {
         new Thread(() -> {
             try {
                 //for(int i = 0; i < outList.size(); i++) {
-                    outList.writeUTF("menu$ ");
+                    outList.writeUTF("menu$" + getTableCount());
                     outList.writeObject(getMenu());
                     outList.flush();
                 //}

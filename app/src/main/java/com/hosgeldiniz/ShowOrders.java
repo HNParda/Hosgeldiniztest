@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.hosgeldiniz.utils.DefActivity;
 @SuppressLint("SetTextI18n")
-public class ShowQrOrder extends DefActivity {
+public class ShowOrders extends DefActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

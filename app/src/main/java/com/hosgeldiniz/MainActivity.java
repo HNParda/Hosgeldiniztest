@@ -32,7 +32,7 @@ public class MainActivity extends DefActivity {
     }
 
     public void ShowOrd(View view) {
-        Intent intentScan = new Intent(this, ShowQrOrder.class);
+        Intent intentScan = new Intent(this, ShowOrders.class);
         startActivity(intentScan);
     }
 

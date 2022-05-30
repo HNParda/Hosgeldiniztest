@@ -13,7 +13,7 @@ import java.net.Socket;
 
 
 import com.hosgeldiniz.utils.DefActivity;
-public class ShowQrPreview extends DefActivity {
+public class test2 extends DefActivity {
 
     Thread Thread1 = null;
     EditText etIP, etPort;

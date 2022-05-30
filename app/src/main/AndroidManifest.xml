@@ -21,9 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateMenu" />
-        <activity android:name=".ShowQrMenu" />
-        <activity android:name=".ShowQrPreview" />
-        <activity android:name=".ShowQrOrder" />
+        <activity android:name=".test2" />
+        <activity android:name=".ShowOrders" />
         <activity android:name=".utils.confirm" />
         <activity android:name=".utils.connect" />
         <activity android:name=".Order" />

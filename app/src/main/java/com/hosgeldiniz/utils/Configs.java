@@ -79,7 +79,7 @@ public class Configs {
             } catch (IOException e) {
                 Port++;
             }
-        return Port;
+        return Port--;
     }
 
     public static String getName() {
