@@ -13,5 +13,5 @@ public class ShowOrders extends DefActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_orders);
     }
-
+// https://stackoverflow.com/questions/3240331/horizontal-listview-in-android
 }
