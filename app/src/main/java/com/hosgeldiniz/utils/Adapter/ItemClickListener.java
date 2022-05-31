@@ -1,5 +1,5 @@
 package com.hosgeldiniz.utils.Adapter;
 import android.view.View;
 interface ItemClickListener {
-    void onClick(View view, int position, boolean isLongClick);
+    void onClick(View view, int position);
 }

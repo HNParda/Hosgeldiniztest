@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,9 +38,7 @@ public class OrderMenuAdapterR
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Log.e("testtest", numberName.get(i));
-        viewHolder.TextView.setText(numberName.get(i));
-        viewHolder.setClickListener((view, position, isLongClick) -> Toast.makeText(context, "#" + position + " - " + numberName.get(position),
-                Toast.LENGTH_SHORT).show());
+        viewHolder.txt.setText(numberName.get(i));
     }
 
     @Override
@@ -48,23 +47,30 @@ public class OrderMenuAdapterR
         return numberName.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView TextView;
-        private ItemClickListener clickListener;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView txt;
+        Button btn1;
+        Button btn2;
 
         ViewHolder(View itemView) {
             super(itemView);
-            TextView = itemView.findViewById(R.id.text);
-            itemView.setOnClickListener(this);
+            txt = itemView.findViewById(R.id.text);
+            btn1 = itemView.findViewById(R.id.btn1);
+            btn2 = itemView.findViewById(R.id.btn2);
+            btn1.setOnClickListener(test(1));
+            btn2.setOnClickListener(test(2));
         }
 
-        void setClickListener(ItemClickListener itemClickListener) {
-            this.clickListener = itemClickListener;
-        }
+        public View.OnClickListener test(int id) {
+            return v -> Toast.makeText(txt.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
 
-        @Override
-        public void onClick(View view) {
-            clickListener.onClick(view, getPosition(), false);
+            /*return new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(txt.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
+                }
+            } */
         }
 
     }
