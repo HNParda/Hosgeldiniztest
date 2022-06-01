@@ -1,5 +1,7 @@
 package com.hosgeldiniz.utils.Adapter;
 
+import static com.hosgeldiniz.MainActivity.orderMenuAdapter;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,17 +17,23 @@ import com.hosgeldiniz.R;
 import com.hosgeldiniz.utils.Configs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OrderMenuAdapterR
         extends RecyclerView.Adapter<OrderMenuAdapterR.ViewHolder> {
 
-    private ArrayList<String> numberName;
     private Context context;
+    public ArrayList<String> OrderList;
 
     public OrderMenuAdapterR(Context context) {
         super();
         this.context = context;
-        numberName = (ArrayList<String>) Configs.getMenu();
+        OrderList = (ArrayList<String>) Configs.getOrder();
+    }
+
+    public void addO(String s) {
+        OrderList.add(s);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -37,14 +45,14 @@ public class OrderMenuAdapterR
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Log.e("testtest", numberName.get(i));
-        viewHolder.txt.setText(numberName.get(i));
+        Log.e("testtest", OrderList.get(i));
+        viewHolder.txt.setText(OrderList.get(i));
     }
 
     @Override
     public int getItemCount() {
-        Log.e("testtest", String.valueOf(numberName.size()));
-        return numberName.size();
+        Log.e("testtest", String.valueOf(OrderList.size()));
+        return OrderList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

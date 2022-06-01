@@ -1,5 +1,7 @@
 package com.hosgeldiniz;
 
+import static com.hosgeldiniz.MainActivity.orderMenuAdapter;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -22,7 +24,7 @@ public class ShowOrders extends DefActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         list = (RecyclerView) findViewById(R.id.list);
         list.setLayoutManager(layoutManager);
-        list.setAdapter(new OrderMenuAdapterR(this));
+        list.setAdapter(orderMenuAdapter);
     }
 
 }

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.hosgeldiniz.utils.Adapter.OrderMenuAdapterR;
 import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 import com.hosgeldiniz.utils.connect;
@@ -16,14 +17,17 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 
 public class MainActivity extends DefActivity {
+        public static OrderMenuAdapterR orderMenuAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Configs.init(this);
+        orderMenuAdapter = new OrderMenuAdapterR(this);
     }
 
     public void CreMenu(View view) {

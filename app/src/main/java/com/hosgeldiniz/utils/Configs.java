@@ -18,11 +18,13 @@ public class Configs {
     public static DefActivity d;
     static SharedPreferences settings;
     static SharedPreferences menu;
+    static SharedPreferences Order;
 
     public static void init(DefActivity defActivity) {
         d = defActivity;
         settings = defActivity.getSharedPreferences("settings", Context.MODE_PRIVATE);
         menu = defActivity.getSharedPreferences("menus", Context.MODE_PRIVATE);
+        Order = defActivity.getSharedPreferences("Order", Context.MODE_PRIVATE);
     }
 
     public static void Toast(String s) {
@@ -46,6 +48,19 @@ public class Configs {
     }
 
     public static void setMenu(List<String> list) {
+        SharedPreferences.Editor editor = Order.edit();
+        editor.putString("Order", new Gson().toJson(list));
+        editor.apply();
+    }
+
+    public static List<String> getOrder() {
+        return new Gson().fromJson(
+                Order.getString("Order", String.valueOf(new ArrayList<String>())),
+                new TypeToken<ArrayList<String>>() {
+                }.getType());
+    }
+
+    public static void setOrder(List<String> list) {
         SharedPreferences.Editor editor = menu.edit();
         editor.putString("menu", new Gson().toJson(list));
         editor.apply();
