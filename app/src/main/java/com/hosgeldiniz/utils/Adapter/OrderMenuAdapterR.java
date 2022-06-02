@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,14 +27,18 @@ import java.util.stream.Collectors;
 public class OrderMenuAdapterR
         extends RecyclerView.Adapter<OrderMenuAdapterR.ViewHolder> {
 
+    public static ArrayList<String> OrderList;
     private final DefActivity context;
-    public ArrayList<String> OrderList;
 
     public OrderMenuAdapterR(DefActivity context) {
         super();
         this.context = context;
-        //Configs.setOrder(new ArrayList<String>());
         OrderList = (ArrayList<String>) Configs.getOrder();
+    }
+
+    public void remove(int i) {
+        OrderList.remove(i);
+        notifyDataSetChanged();
     }
 
     public void addO(String s) {
@@ -48,7 +53,7 @@ public class OrderMenuAdapterR
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.order_item, viewGroup, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, this);
     }
 
     @Override
@@ -60,7 +65,8 @@ public class OrderMenuAdapterR
         testt.add(" ");
 
         for (int i = 0; i < msg[2].length(); i++) {
-            if (!String.valueOf(msg[2].charAt(i)).equals(testt.get(testt.size() - 1))) testt.add(String.valueOf(msg[2].charAt(i)));
+            if (!String.valueOf(msg[2].charAt(i)).equals(testt.get(testt.size() - 1)))
+                testt.add(String.valueOf(msg[2].charAt(i)));
         }
 
         StringBuilder test = new StringBuilder().append("abc");
@@ -102,9 +108,11 @@ public class OrderMenuAdapterR
         public TextView Table;
         Button btn1;
         Button btn2;
+        OrderMenuAdapterR ctx;
 
-        ViewHolder(View view) {
+        ViewHolder(View view, OrderMenuAdapterR ctx) {
             super(view);
+            this.ctx = ctx;
             Order = view.findViewById(R.id.order);
             Table = view.findViewById(R.id.table);
 
@@ -115,7 +123,10 @@ public class OrderMenuAdapterR
         }
 
         public View.OnClickListener test(int id) {
-            return v -> Toast.makeText(Order.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
+            return v -> {
+                ctx.remove(getPosition());
+                Toast.makeText(Order.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
+            };
 
             /*return new View.OnClickListener() {
                 @Override
@@ -124,6 +135,7 @@ public class OrderMenuAdapterR
                 }
             } */
         }
+
 
     }
 }
