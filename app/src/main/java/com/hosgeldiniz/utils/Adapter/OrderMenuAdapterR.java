@@ -1,8 +1,9 @@
 package com.hosgeldiniz.utils.Adapter;
 
-import static com.hosgeldiniz.MainActivity.orderMenuAdapter;
+import static com.hosgeldiniz.utils.Configs.getMenu;
+import static com.hosgeldiniz.utils.Configs.setOrder;
+import static java.lang.Integer.parseInt;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,25 +16,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hosgeldiniz.R;
 import com.hosgeldiniz.utils.Configs;
+import com.hosgeldiniz.utils.DefActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class OrderMenuAdapterR
         extends RecyclerView.Adapter<OrderMenuAdapterR.ViewHolder> {
 
-    private Context context;
+    private final DefActivity context;
     public ArrayList<String> OrderList;
 
-    public OrderMenuAdapterR(Context context) {
+    public OrderMenuAdapterR(DefActivity context) {
         super();
         this.context = context;
+        //Configs.setOrder(new ArrayList<String>());
         OrderList = (ArrayList<String>) Configs.getOrder();
     }
 
     public void addO(String s) {
-        OrderList.add(s);
-        notifyDataSetChanged();
+        context.runOnUiThread((Runnable) () -> {
+            OrderList.add(s);
+            notifyDataSetChanged();
+        });
+        setOrder(OrderList);
     }
 
     @Override
@@ -44,9 +52,42 @@ public class OrderMenuAdapterR
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Log.e("testtest", OrderList.get(i));
-        viewHolder.txt.setText(OrderList.get(i));
+    public void onBindViewHolder(ViewHolder viewHolder, int pos) {
+        String[] msg = OrderList.get(pos).split("[$]");
+
+
+        ArrayList<String> testt = new ArrayList<>();
+        testt.add(" ");
+
+        for (int i = 0; i < msg[2].length(); i++) {
+            if (!String.valueOf(msg[2].charAt(i)).equals(testt.get(testt.size() - 1))) testt.add(String.valueOf(msg[2].charAt(i)));
+        }
+
+        StringBuilder test = new StringBuilder().append("abc");
+        for (int i = 1; i < testt.size(); i++) {
+            int count = 0;
+            for (int c = 0; c < testt.get(i).length(); c++) {
+                Pattern pattern = Pattern.compile("[^" + testt.get(i).charAt(c) + "]*" + testt.get(i).charAt(c) + "");
+                Matcher matcher = pattern.matcher(msg[2]);
+                while (matcher.find()) {
+                    count++;
+                }
+            }
+
+            int finalI = i;
+            String Order = getMenu().stream().filter(o -> o.split("[$]")[3]
+                            .contains(testt.get(finalI)))
+                    .collect(Collectors.toList()).get(0)
+                    .split("[$]")[1]
+                    .split("[.]")[1];
+
+            test.append("\n" + count + "x" + Order);
+        }
+
+
+        viewHolder.Order.setText("");
+        viewHolder.Order.setText(test.toString().replace("abc\n", ""));
+        viewHolder.Table.setText("Masa " + (parseInt(msg[1]) + 1));
     }
 
     @Override
@@ -57,21 +98,24 @@ public class OrderMenuAdapterR
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txt;
+        public TextView Order;
+        public TextView Table;
         Button btn1;
         Button btn2;
 
-        ViewHolder(View itemView) {
-            super(itemView);
-            txt = itemView.findViewById(R.id.text);
-            btn1 = itemView.findViewById(R.id.btn1);
-            btn2 = itemView.findViewById(R.id.btn2);
+        ViewHolder(View view) {
+            super(view);
+            Order = view.findViewById(R.id.order);
+            Table = view.findViewById(R.id.table);
+
+            btn1 = view.findViewById(R.id.btn1);
+            btn2 = view.findViewById(R.id.btn2);
             btn1.setOnClickListener(test(1));
             btn2.setOnClickListener(test(2));
         }
 
         public View.OnClickListener test(int id) {
-            return v -> Toast.makeText(txt.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
+            return v -> Toast.makeText(Order.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
 
             /*return new View.OnClickListener() {
                 @Override

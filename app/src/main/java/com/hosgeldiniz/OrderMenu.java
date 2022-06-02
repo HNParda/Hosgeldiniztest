@@ -13,6 +13,7 @@ import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class OrderMenu extends DefActivity {
 
@@ -25,7 +26,6 @@ public class OrderMenu extends DefActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_menu);
         table = getIntent().getIntExtra("table", 1);
-        Configs.Toast(String.valueOf(table));
         ListView = findViewById(R.id.List);
         OrderMenuAdapter = new OrderMenuAdapter(this, ListView);
         ListView.setAdapter(OrderMenuAdapter);
@@ -47,5 +47,11 @@ public class OrderMenu extends DefActivity {
         });
         th.start();
         th.interrupt();
+
+        for (int i = 0; i < OrderMenuAdapter.getCount() ; i++) {
+            OrderMenuAdapter.order = new ArrayList<>();
+            View v = OrderMenuAdapter.getView(i, null, null);
+                if (v.findViewById(R.id.count) != null) OrderMenuAdapter.remove(v.findViewById(R.id.count));
+        }
     }
 }

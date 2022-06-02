@@ -47,7 +47,14 @@ public class Configs {
                 }.getType());
     }
 
+
     public static void setMenu(List<String> list) {
+        SharedPreferences.Editor editor = menu.edit();
+        editor.putString("menu", new Gson().toJson(list));
+        editor.apply();
+    }
+
+    public static void setOrder(List<String> list) {
         SharedPreferences.Editor editor = Order.edit();
         editor.putString("Order", new Gson().toJson(list));
         editor.apply();
@@ -58,12 +65,6 @@ public class Configs {
                 Order.getString("Order", String.valueOf(new ArrayList<String>())),
                 new TypeToken<ArrayList<String>>() {
                 }.getType());
-    }
-
-    public static void setOrder(List<String> list) {
-        SharedPreferences.Editor editor = menu.edit();
-        editor.putString("menu", new Gson().toJson(list));
-        editor.apply();
     }
 
     public static int getTableCount() {

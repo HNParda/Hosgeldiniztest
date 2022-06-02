@@ -61,7 +61,13 @@ public class OrderMenuAdapter extends BaseAdapter {
         for (int i = 0; i < count; i++) order.add(item);
     }
 
-    String[] getArray(View view) { return List.get(ListView.getPositionForView(view)).split("[$]"); }
+    public void remove(EditText view) {
+        view.setText(String.valueOf(0));
+    }
+
+    String[] getArray(View view) {
+        return List.get(ListView.getPositionForView(view)).split("[$]");
+    }
 
     @SuppressLint("InflateParams")
     @Override
@@ -78,10 +84,10 @@ public class OrderMenuAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.menu_item, null);
             Button btn = view.findViewById(R.id.menubtn);
             btn.setText(args[1]);
-            ImageButton checkBox = view.findViewById(R.id.add);
-            checkBox.setOnClickListener(this::add);
-            checkBox = view.findViewById(R.id.remove);
-            checkBox.setOnClickListener(this::remove);
+            ImageButton imgbtn = view.findViewById(R.id.add);
+            imgbtn.setOnClickListener(this::add);
+            imgbtn = view.findViewById(R.id.remove);
+            imgbtn.setOnClickListener(this::remove);
         }
         return view;
     }

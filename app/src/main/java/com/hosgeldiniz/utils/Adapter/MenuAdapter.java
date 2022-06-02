@@ -42,7 +42,7 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     public void addGroup(String s) {
-        List.add("group$" + s);
+        List.add("group$" + s + "$" + (getItemCount() + 1));
         notifyDataSetChanged();
     }
 

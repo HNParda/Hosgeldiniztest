@@ -3,7 +3,6 @@ package com.hosgeldiniz.utils;
 import static com.hosgeldiniz.MainActivity.orderMenuAdapter;
 import static com.hosgeldiniz.utils.Configs.getOrder;
 import static com.hosgeldiniz.utils.Configs.setMenu;
-import static com.hosgeldiniz.utils.Configs.setOrder;
 import static com.hosgeldiniz.utils.Configs.setTableCount;
 
 import android.os.AsyncTask;
@@ -52,15 +51,12 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
             Log.e("testtest1", "test2");
             try {
 
-                msg = oIn.readUTF().split("[$]");
+                String in = oIn.readUTF();
+                msg = in.split("[$]");
                 Log.e("testtest2", Arrays.toString(msg));
                 switch (msg[0]) {
 
                     default:
-                        if (oIn.readObject() != null) {
-                            setMenu((List<String>) oIn.readObject());
-                            Toast(HostName + " yeni bir Menü gönderdi  2");
-                        }
                         //Thread.sleep(30);
                         break;
 
@@ -77,7 +73,7 @@ public class MsgAsync extends AsyncTask<String, Void, Void> {
                         break;
 
                     case "order":
-                        orderMenuAdapter.addO(Arrays.toString(msg));
+                        orderMenuAdapter.addO(in);
                         Toast(HostName + " " + msg[1] + " " + msg[2]);
                         break;
 
