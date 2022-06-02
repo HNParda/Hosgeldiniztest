@@ -27,9 +27,9 @@ public class Configs {
         Order = defActivity.getSharedPreferences("Order", Context.MODE_PRIVATE);
     }
 
-    public static void Toast(String s) {
-        Log.e("testtest", s);
-        d.runOnUiThread(() -> Toast.makeText(d, s, Toast.LENGTH_SHORT).show());
+    public static void Toast(String s, int length) {
+        Log.e("testtest configs toast", s);
+        d.runOnUiThread(() -> Toast.makeText(d, s, length).show());
     }
 
     public static void setConfigs(String Name, String IP, int Port) {

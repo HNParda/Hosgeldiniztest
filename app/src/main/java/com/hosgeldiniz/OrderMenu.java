@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hosgeldiniz.utils.Adapter.OrderMenuAdapter;
 import com.hosgeldiniz.utils.Configs;
@@ -33,25 +33,20 @@ public class OrderMenu extends DefActivity {
 
     public void test(View view) {
         StringBuilder t = new StringBuilder();
-        for (int i = 0; i < OrderMenuAdapter.order.size(); i++)
-            t.append(OrderMenuAdapter.order.get(i));
-        ((TextView) findViewById(R.id.textt)).setText(t);
-        Log.e("testtest", "order$" + table + "$" + t);
-        Thread th =  new Thread(() -> {
+        for (int i = 0; i < OrderMenuAdapter.order.size(); i++) t.append(OrderMenuAdapter.order.get(i));
+        Thread th = new Thread(() -> {
             try {
+                if (outList == null || t.toString().isEmpty()) return;
+                Configs.Toast("Siparis gönderildi!", Toast.LENGTH_LONG);
                 outList.writeUTF("order$" + table + "$" + t);
                 outList.flush();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e("testtest", e.getMessage());
             }
         });
         th.start();
         th.interrupt();
-
-        for (int i = 0; i < OrderMenuAdapter.getCount() ; i++) {
-            OrderMenuAdapter.order = new ArrayList<>();
-            View v = OrderMenuAdapter.getView(i, null, null);
-                if (v.findViewById(R.id.count) != null) OrderMenuAdapter.remove(v.findViewById(R.id.count));
-        }
+        OrderMenuAdapter.order = new ArrayList<>();
+        for (int i = 0; i < OrderMenuAdapter.EditText.size(); i++) OrderMenuAdapter.EditText.get(i).setText("0");
     }
 }

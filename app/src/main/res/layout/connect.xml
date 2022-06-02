@@ -35,14 +35,4 @@
         android:textColor="@color/white"
         android:id="@+id/localip"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="localip"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:id="@+id/edittest"/>
-
 </LinearLayout>

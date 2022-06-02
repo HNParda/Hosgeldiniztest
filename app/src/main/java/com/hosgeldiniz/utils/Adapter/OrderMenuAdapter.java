@@ -19,6 +19,8 @@ import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,7 @@ public class OrderMenuAdapter extends BaseAdapter {
 
     private void add(View view) {
         EditText counter = ((View) view.getParent()).findViewById(R.id.count);
+        if (!EditText.contains(counter)) EditText.add(counter);
         String c = counter.getEditableText().toString();
         int count;
         if (!c.isEmpty()) count = parseInt(c);
@@ -48,6 +51,7 @@ public class OrderMenuAdapter extends BaseAdapter {
         count++;
         counter.setText(String.valueOf(count));
         order.add(getArray(view)[3]);
+        Collections.sort(order);
     }
 
     private void remove(View view) {
@@ -59,15 +63,15 @@ public class OrderMenuAdapter extends BaseAdapter {
         String item = getArray(view)[3];
         order = (ArrayList<String>) order.stream().filter(i -> !i.equals(item)).collect(Collectors.toList());
         for (int i = 0; i < count; i++) order.add(item);
+        Collections.sort(order);
     }
 
-    public void remove(EditText view) {
-        view.setText(String.valueOf(0));
-    }
 
     String[] getArray(View view) {
         return List.get(ListView.getPositionForView(view)).split("[$]");
     }
+
+    public ArrayList<EditText> EditText = new ArrayList<>();
 
     @SuppressLint("InflateParams")
     @Override
