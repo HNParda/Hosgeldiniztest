@@ -12,7 +12,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,23 +40,8 @@ public class connect extends DefActivity {
     public static MsgAsync msgAsyncs;
     public static Thread threads;
 
-    public static connect ctx;
-    public static int pos = 0;
-
-    @SuppressLint({"SetTextI18n"})
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.connect);
-        String ip = Formatter.formatIpAddress(((WifiManager) getSystemService(WIFI_SERVICE)).getConnectionInfo().getIpAddress());
-        ((TextView) findViewById(R.id.localip)).setText(
-                "Host IP: " + ip);
-        ctx = this;
-    }
 
     public static void initThread(boolean host, int Port) {
-
-        Log.e("testtest", pos + " " + Port + " ");
 
         threads = new Thread(() -> {
 
@@ -74,10 +58,8 @@ public class connect extends DefActivity {
                 outList.writeUTF("name$" + getName());
                 outList.flush();
 
-                msgAsyncs = new MsgAsync(inList, ctx, host);
+                msgAsyncs = new MsgAsync(inList, host);
                 msgAsyncs.execute();
-
-                pos++;
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -86,24 +68,33 @@ public class connect extends DefActivity {
         threads.start();
     }
 
+    @SuppressLint({"SetTextI18n"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.connect);
+        String ip = Formatter.formatIpAddress(((WifiManager) getSystemService(WIFI_SERVICE)).getConnectionInfo().getIpAddress());
+        ((TextView) findViewById(R.id.localip)).setText(
+                "Host IP: " + ip);
+    }
+
     public void Stop(View view) {
         try {
-            if (outList != null) outList.close();
-            if (inList != null) inList.close();
             if (socket != null) socket.close();
             if (serversocket != null) serversocket.close();
             if (threads != null) threads.interrupt();
             if (msgAsyncs != null) msgAsyncs.stop();
+            if (outList != null) outList.close();
+            if (inList != null) inList.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         outList = null;
-        inList = null;
         socket = null;
         serversocket = null;
         threads = null;
         msgAsyncs = null;
-        pos = 0;
+        inList = null;
     }
 
     public void Host(View view) {
