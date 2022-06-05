@@ -9,12 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hosgeldiniz.R;
 import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
@@ -27,28 +28,25 @@ import java.util.stream.Collectors;
 public class OrderMenuAdapterR
         extends RecyclerView.Adapter<OrderMenuAdapterR.ViewHolder> {
 
-    public static ArrayList<String> OrderList;
     private final DefActivity context;
+    public ArrayList<String> OrderList;
 
     public OrderMenuAdapterR(DefActivity context) {
         super();
         this.context = context;
+        Configs.setOrder(new ArrayList<>());
         OrderList = (ArrayList<String>) Configs.getOrder();
     }
 
-    public void remove(int i) {
-        OrderList.remove(i);
-        notifyDataSetChanged();
-    }
-
     public void addO(String s) {
-        context.runOnUiThread((Runnable) () -> {
+        context.runOnUiThread(() -> {
             OrderList.add(s);
             notifyDataSetChanged();
         });
         setOrder(OrderList);
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
@@ -57,7 +55,7 @@ public class OrderMenuAdapterR
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int pos) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int pos) {
         String[] msg = OrderList.get(pos).split("[$]");
 
 
@@ -87,7 +85,7 @@ public class OrderMenuAdapterR
                     .split("[$]")[1]
                     .split("[.]")[1];
 
-            test.append("\n" + count + "x" + Order);
+            test.append("\n").append(count).append("x").append(Order);
         }
 
 
@@ -106,36 +104,47 @@ public class OrderMenuAdapterR
 
         public TextView Order;
         public TextView Table;
-        Button btn1;
-        Button btn2;
-        OrderMenuAdapterR ctx;
+        public Button btn1;
+        public Button btn2;
+        public FloatingActionButton fab;
 
-        ViewHolder(View view, OrderMenuAdapterR ctx) {
+        OrderMenuAdapterR Adapter;
+
+        ViewHolder(View view, OrderMenuAdapterR Adapter) {
             super(view);
-            this.ctx = ctx;
+            this.Adapter = Adapter;
             Order = view.findViewById(R.id.order);
             Table = view.findViewById(R.id.table);
 
             btn1 = view.findViewById(R.id.btn1);
             btn2 = view.findViewById(R.id.btn2);
-            btn1.setOnClickListener(test(1));
-            btn2.setOnClickListener(test(2));
+            fab = view.findViewById(R.id.delete);
+            btn1.setOnClickListener(test(0));
+            btn2.setOnClickListener(test(1));
+            fab.setOnClickListener(test(2));
         }
 
         public View.OnClickListener test(int id) {
             return v -> {
-                ctx.remove(getPosition());
+                switch (id) {
+
+                    case 0:
+                        Toast.makeText(Order.getContext(), String.valueOf(getAdapterPosition()) + id, Toast.LENGTH_SHORT).show();
+                        return;
+
+                    case 1:
+                        Toast.makeText(Order.getContext(), String.valueOf(getLayoutPosition()) + id, Toast.LENGTH_SHORT).show();
+                        return;
+
+                    case 2:
+                        Adapter.OrderList.remove(getPosition());
+                        Adapter.notifyDataSetChanged();
+                        return;
+                }
+
                 Toast.makeText(Order.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
             };
-
-            /*return new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(txt.getContext(), String.valueOf(getPosition()) + id, Toast.LENGTH_SHORT).show();
-                }
-            } */
         }
-
 
     }
 }

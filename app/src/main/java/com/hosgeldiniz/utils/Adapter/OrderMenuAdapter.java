@@ -19,7 +19,6 @@ import com.hosgeldiniz.utils.Configs;
 import com.hosgeldiniz.utils.DefActivity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +55,9 @@ public class OrderMenuAdapter extends BaseAdapter {
 
     private void remove(View view) {
         EditText counter = ((View) view.getParent()).findViewById(R.id.count);
-        int count = parseInt(counter.getEditableText().toString());
+        String c = counter.getEditableText().toString();
+        if (c.isEmpty()) c = "1";
+        int count = parseInt(c);
         if (count == 0) return;
         count--;
         counter.setText(String.valueOf(count));
@@ -88,10 +89,21 @@ public class OrderMenuAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.menu_item, null);
             Button btn = view.findViewById(R.id.menubtn);
             btn.setText(args[1]);
+            EditText counter = view.findViewById(R.id.count);
+
+
             ImageButton imgbtn = view.findViewById(R.id.add);
             imgbtn.setOnClickListener(this::add);
+
             imgbtn = view.findViewById(R.id.remove);
             imgbtn.setOnClickListener(this::remove);
+
+
+            String[] item = List.get(i).split("[$]");
+            ArrayList<String> test = (ArrayList<String>) order.stream().filter(t -> t.equals(item[3])).collect(Collectors.toList());
+            String test2 = String.valueOf(test.size());
+
+            counter.setText(test2);
         }
         return view;
     }

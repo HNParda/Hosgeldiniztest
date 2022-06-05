@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hosgeldiniz.R;
@@ -32,9 +31,9 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     public void addItem(String s) {
-        Log.e("testtest", "item$" + (getItemCount() + 1) + ". " + s + "$" + (getCount() + 1));
-        List.add("item$" + (getItemCount() + 1) + ". " + s + "$" + (getCount() + 1));
+        List.add("item$" + (getItemCount() + 1) + ". " + s + "$" + getCount());
         notifyDataSetChanged();
+        Log.e("testtest", List.get(List.size() - 1));
     }
 
     public List<String> getList() {
@@ -42,8 +41,9 @@ public class MenuAdapter extends BaseAdapter {
     }
 
     public void addGroup(String s) {
-        List.add("group$" + s + "$" + (getItemCount() + 1));
+        List.add("group$" + s + "$" + getCount());
         notifyDataSetChanged();
+        Log.e("testtest", List.get(List.size() - 1));
     }
 
     private void delete(View view) {
@@ -83,9 +83,10 @@ public class MenuAdapter extends BaseAdapter {
 
     public int getItemCount() {
         int s = List.size();
-        for (int i = 0; i < s; i++) if (List.get(i).split("[$]")[0].equals("group")) s--;
-        Log.e("testtest", List.size() + " " + s);
-        return s;
+        int count = 0;
+        for (int i = 0; i < s; i++) if (List.get(i).split("[$]")[0].equals("group")) count++;
+        Log.e("testtest itemcount", List.size() + " " + (s - count));
+        return s - count;
     }
 
     @Override
